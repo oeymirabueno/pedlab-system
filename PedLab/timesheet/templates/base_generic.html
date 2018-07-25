@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>PedLab System</title>{% endblock %}
+  <style>
+    table{
+      border-collapse:collapse;
+    }
+    td{
+      padding:4px;
+    }
+  	#topbar{
+  		background-color: navy;
+  		padding: 30px;
+  		padding-left: 10px;
+  		color: #dddddd;
+  		display: block;
+  		width: 95%;
+  		
+  	}
+  	.sidebar-nav{
+  		display: inline-block;
+  		background-color: lightblue;
+  		vertical-align: top;
+  		list-style: none;
+  		padding-left: 10px;
+  		width: 120px;
+  		height: 400px;
+  	}
+  	.main {
+  		display: inline-block;
+  		background-color: lightgrey;
+  		vertical-align: top;
+  		min-width: 200px;
+  		min-height: 400px;
+  		padding-left: 10px;
+      padding-right: 10px;
+      margin-left: 10px;
+      overflow: hidden;
+  		height: 100%;
+  	}
+    .helptext{
+      list-style: none;
+      font-size: 10px;
+    }
+    .helptext ul{
+      list-style: none;
+      padding-left: 0px;
+    }
+    .errorlist{
+      list-style: none;
+      font-size: 10px;
+      
+      padding-left: 0px;
+    }
+    .errorlist ul{
+      list-style: none;
+      padding-left: 0px;
+    }
+  	.am{
+  		display: inline-block;
+  		vertical-align: top;
+  	}
+  	.am:before{
+  		content:"";
+  		display: inline-block;
+  		vertical-align: top;
+  	}
+  	ul{
+  		margin-top: 0;
+  	}
+  	table,th,td{
+  		border: 1px solid black;
+  	}
+    #cpw{
+      border: 0px;
+    }
+</style>
+<script type="text/javascript" >
+function toggle(source,name) {
+    checkboxes = document.getElementsByName(name);
+    for (var i = 0,
+        n = checkboxes.length; i < n; i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
+</script>
+</head>
+
+<body>
+<h1 id="topbar">PedLab System</h1>
+<div class="am">
+  {% block sidebar %}<!-- insert default navigation text for every page -->
+<ul class="sidebar-nav">
+   <br>
+   {% if user.is_authenticated %}
+     <li>User: {{ user.get_username }}</li>
+     <li>Type: {{ user.is_usertype }}</li>
+     <li><a href="{% url 'view_profile' %}">View Profile</a></li>
+     <li><a href="{% url 'logout'%}">Logout</a></li>   
+   {% else %}
+     <li><a href="{% url 'login'%}">Login</a></li>   
+   {% endif %} 
+   <br>
+
+   <br>
+   <br>
+   {% now "D"%}<br>
+   {% now "j M Y"%}<br>
+   {% now "h:i:s A"%}
+  </ul>
+  {% endblock %}
+  <div class="main">
+  {% block content %}<!-- default content text (typically empty) -->
+  {% endblock %}
+</div>
+</div>
+</body>
+</html>

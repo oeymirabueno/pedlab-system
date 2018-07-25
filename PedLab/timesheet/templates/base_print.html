@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>PedLab System: Print</title>{% endblock %}
+  <style media="screen">
+    table{
+      border-collapse:collapse;
+    }
+    td{
+      padding: 5px;
+    }
+  	#topbar{
+  		text-align: center;
+  	}
+  	#payment_details{
+      border: 1px solid black;
+    } 
+    #payment_details td{
+      text-align: right;
+    }
+
+
+  	.main {
+  		display: inline-block;
+  		background-color: white;
+  		vertical-align: top;
+      width: 100%;
+  	}
+  	
+  	#record_details, #record_details th, #record_details td{
+      border: 0px;
+      padding-left: 20px;
+    }
+
+
+  	
+</style>
+<style media="print">
+    #topbar{
+      text-align: center;
+    }
+    #hidden{
+      display: none;
+    }
+    #payment_details{
+      border: 1px solid black;
+    } 
+    #payment_details td{
+      text-align: right;
+    }
+
+
+    .main {
+      display: inline-block;
+      background-color: white;
+      vertical-align: top;
+      width: 100%;
+    }
+    
+    #record_details, #record_details th, #record_details td{
+      border: 0px;
+      padding-left: 20px;
+    }
+
+
+    
+</style>
+</head>
+
+<body>
+<center><a href="{{request.META.HTTP_REFERER}}" id="hidden">Return</a></center>
+<h5 align='right'>accessed by: {{last_user}}<br>
+{{access_time}}</h5>
+<h1 id="topbar">PedLab System</h1>
+
+  <div class="main">
+  {% block content %}<!-- default content text (typically empty) -->
+  {% endblock %}
+  </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<br>
+{% if error_message %}<p><strong>{{error_message}}</strong></p>{% endif %}
+Welcome to the index page.<br>
+<a href="{% url 'time_in' %}">Time In</a><br>
+<a href="{% url 'time_out' %}">Time Out</a><br>
+<a href="{% url 'view_records' %}">View Records</a><br>
+<a href="{% url 'view_payments' %}">View Payments</a><br>
+{% endblock %}

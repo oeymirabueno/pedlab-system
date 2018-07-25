@@ -1,0 +1,77 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{%if message %}<strong>{{message}}</strong>{%endif%}
+
+<br>
+
+<a href="{% url 'index' %}">Back to Index</a>
+<table>
+	<tr>
+		<th>
+			Username
+		</th>
+		<td>
+			{{display_user.username}}
+		</td>
+	</tr>
+	<tr>
+		<th>
+			First Name
+		</th>
+		<td>
+			{{display_user.first_name}}
+		</td>
+	</tr>
+	<tr>
+		<th>
+			Last Name
+		</th>
+		<td>
+			{{display_user.last_name}}
+		</td>
+	</tr>
+	<tr>
+		<th>
+			Date Joined
+		</th>
+		<td>
+			{{display_user.date_joined|date:"D, j M Y, h:i:s A"}}
+		</td>
+	</tr>
+	<tr>
+		<th>
+			Email Address
+		</th>
+		<td>
+			{{display_user.email}}
+		</td>
+	</tr>
+	<tr>
+		<th>
+			User Type
+		</th>
+		<td>
+			{{display_user.is_usertype}}
+		</td>
+	</tr>
+	<tr>
+		<th>
+			Rate/Hour
+		</th>
+		<td>
+			PHP {{display_user.rate_per_hour}}
+		</td>
+	</tr>
+	<tr>
+		<th>
+			Password
+		</th>
+		<td>
+			*************
+		</td>
+	</tr>
+</table>
+<a href="{% url 'edit_profile' %}">Edit Profile</a><br>
+<a href="{% url 'change_password' %}">Change Password</a><br>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<br>
+<a href="{% url 'index' %}">Back to Index</a>
+<h1>View Payments </h1>
+
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>&emsp;
+<a href="{% url 'view_records' %}">View Records</a>
+  </form>
+  <table>
+  	<tr>
+		<th>
+			Transaction ID
+		</th>
+		<th>
+			Username
+		</th>
+		<th>
+			Record ID/s
+		</th>
+		<th>
+			Amount
+		</th>
+		<th>
+			Date Paid
+		</th>
+		<th>
+			Transaction Type
+		</th>
+
+	</tr>
+  {% for record in filter.qs %}
+    <tr>
+		<td>
+			{{record.transaction_id}}
+		</td>
+		<td>
+			{{record.username}}
+		</td>
+		<td>
+			{% for thing in record.record.all %}
+			{{thing.actual_id}},&nbsp;
+			{% endfor %}
+		</td>
+		<td>
+			PHP {{record.amount}}
+		</td>
+		<td>
+			{{record.date_paid}}
+		</td>
+		<td>
+			{{record.transaction_type}}
+		</td>
+		<td style="border: 0">
+			
+			<a href="{% url 'print_payments' record.transaction_id %}" target="_blank">Print Payment</a>
+		</td>{%comment%}{% url 'print_payments' record.transaction_id %}{%endcomment%}
+	</tr>
+  {% endfor %}
+  </table>
+
+
+{% endblock %}

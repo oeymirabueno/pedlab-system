@@ -1,0 +1,66 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% load static %}
+<br>
+<a href="{% url 'index' %}">Back to Index</a>
+<h1>View Records </h1>
+
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>&emsp;
+    <button type="submit" formaction="{%url 'print_records' %}">Print Records</button>
+  </form>
+  <table>
+  	<tr>
+  		<th>
+  			Record ID
+  		</th>
+		<th>
+			Username
+		</th>
+		<th>
+			Date
+		</th>
+		<th>
+			Time In
+		</th>
+		<th>
+			Time Out
+		</th>
+		<th>
+			Amount
+		</th>
+		<th>
+			Paid?
+		</th>
+
+	</tr>
+  {% for record in filter.qs %}
+    <tr>
+    	<td>
+    		{{record.record_id}}
+    	</td>
+		<td>
+			{{record.username.actual_un}}
+		</td>
+		<td>
+			{{record.date}}
+		</td>
+		<td>
+			{{record.time_in|date:"h:i:s A"}}
+		</td>
+		<td>
+			{{record.time_out|date:"h:i:s A"}}
+		</td>
+		<td>
+			PHP {%if record.amount is None%} 0.00 {%else%}{{record.amount}}{%endif%}
+		</td>
+		<td>
+			{{record.paid}}
+		</td>
+	</tr>
+  {% endfor %}
+  </table>
+{% endblock %}
